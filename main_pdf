@@ -1,0 +1,865 @@
+\documentclass[12pt]{article}
+\usepackage{blindtext}
+\usepackage[left=0.75in, right=0.75in, top=1in, bottom=1in]{geometry}
+\usepackage{pifont}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{parcolumns}
+\usepackage{colortbl}
+\usepackage{arydshln}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+
+\title{LaTeX Notes}
+\author{Michel Nory Garcia}
+
+
+
+\begin{document}
+\tableofcontents
+\maketitle
+\part{Installation and enviroment}
+\part{Basic concepts}
+\section{Estructure}
+\subsection{Documentclass \& Packages}
+\paragraph{}
+The very first line of our document should be: \textbackslash documentclass[paper size(a4paper),font size(12pt), single or two-sided(singleside)]\{class of document\}\\
+
+The most popular document class options are:
+\subparagraph{article}
+For articles and scientific journals, presentation, short reports
+\subparagraph{IEEEtran}
+For articles with the IEEE Transactions format
+\subparagraph{report}
+For longer reports containing with chapters, small books, thesis,
+\subparagraph{book}
+For Books
+
+\paragraph{}
+If you want to use a package: \textbackslash usepackage\{package name\}
+
+
+\subsection{Document Info}
+\paragraph{}
+Here we can use \textbackslash title\{title\}, \textbackslash author\{author\},\textbackslash date\{\}
+
+\subsubsection{Page Stylling (header and footer)}
+\paragraph{}
+using the \textbackslash pagestyle\{style options\} for the whole document or \textbackslash thispagestyle\{style options\} for one page only (in document structure section) , you can change headers and footers base on the style option you choose.\\
+\subparagraph{empty}
+No header no footers
+\subparagraph{plain}
+Footer contains the page number
+\subparagraph{headings}
+Header contains section name and page number
+\subparagraph{myheadings}
+Header contains page number
+\paragraph{*fancyhdr package better than this option*}
+
+\subsubsection{Numbering}
+\paragraph{}
+Using the command \textbackslash pagenumbering\{\} lets change the type of numbering of the pages from this options : arabic,roman, Roman, alph, Alph.
+\paragraph{}
+To reset the page numbering on a given page (in the document structure section) use this command \textbackslash setcounter \{page\}\{number to start from\}
+\paragraph{}
+If you want to use in some part of your text roman letters and in the rest arabic use:\\
+\textbackslash frontmatter ... text with page numbering roman\\
+\textbackslash mainmatter ... text with page numbering arabic
+
+\subsubsection{Color}
+\paragraph{}
+To change the color the page, text and tables the package \texttt{xcolor} lets you use basic colors like ``red'', ``blue'', ``orange'', ``black'', ldots ; or with hex codes.To change the color of text use: \\
+\textbackslash textcolor \{color name\}\{text\}\\
+\textbackslash textcolor [HTML]\{Hex code of color\}\{text\}\\
+To change the page color (in document info section):\\
+\textbackslash pagecolor \{color\}
+
+
+
+
+\subsubsection{Orientation}
+\paragraph{}
+If you want to change the orientation of the entire document to landscape use this command in Document and Packages section: \textbackslash usepackage[landscape]\{geometry\}.*incompatible with fancyhdr*
+\paragraph{}
+If you only want to orient one page there are to packages the pdflscape(turn 90º the page) or lscape (turn 90º text only). Independently of which package you choose use this command and put the text in between: \textbackslash begin\{landscape\} ... \textbackslash end\{landscape\}.
+
+\subsubsection{Text alginment}
+\paragraph{Left align (Default)}
+\textbackslash begin\{flushleft\} \ldots \textbackslash end\{flushleft\}
+\paragraph{Right align}
+\textbackslash begin\{flushright\} \ldots \textbackslash end\{flushright\}
+\paragraph{Center align}
+\textbackslash begin\{center\} \ldots \textbackslash end\{center\}
+
+\subsubsection{Spacing}
+With the \texttt{setspace} package
+\paragraph{Preditermined values}
+\subparagraph{Whole text}
+\textbackslash singlespacing or \textbackslash onehalfspacing or \textbackslash doublespacing
+\subparagraph{Particular text}
+Types: singlespace, onehalfspace and doublespace\\
+\textbackslash begin\{type\} \ldots \textbackslash end\{type\}
+\paragraph{Custom values}
+\subparagraph{Whole text}
+\textbackslash spacing\{number\}
+\subparagraph{Particular text}
+\textbackslash begin\{spacing\}\{nunber\} \ldots \textbackslash end\{spacing\}
+\paragraph{Titles}
+\subparagraph{}
+We use the package \texttt{titlesec} to locate the title and format it \\
+\textbackslash titlespacing\{\textbackslash(chapter, section, paragraph, \ldots)\}\{spacing from left(pt)\}\{vertical space before the title(pt)\}\{vertical space after the title(pt)\}
+\subparagraph{}
+To change the format (size, font, what to display)\\
+\textbackslash titleformat\{\textbackslash(chapter, section, paragraph, \ldots)\}[display]\{size of the letter (\textbackslash Huge)\}\{what to display befor section name (\textbackslash thesection)\}\{distance befor the text (pt)\}\{format of the text (\textbackslash texttt)\}\\
+
+*there are more ways to format the titles see documentation of the package*
+
+
+
+
+
+
+\subsubsection{Columns}
+\paragraph{Whole Document}
+To format the whole document with 2 columns use the atribute twocolumn in the documentclass: \textbackslash documentclass[... , twocolumn, ... ]\{Type of document\}
+\paragraph{With multicol package}
+This package will allow you to format specific chunks of text with the amount of columns that you want (In document Structure Section) *All columns with the same size*:\\
+\textbackslash usepackage{multicol}\\
+\textbackslash begin\{multicols\}\{number of columns\} ... \textbackslash end\{multicols\}
+\subparagraph{Column Spacing:}
+ before the \textbackslash begin\{multicols\}\{number of columns\}
+use:\\
+\textbackslash setlength\textbackslash columnsep\{distance in pt\}
+\subparagraph{Column Seperator}
+Before the \textbackslash begin ... \textbackslash end statement use:\\
+\textbackslash setlength\{\textbackslash columnseprule\}\{size in pt\}
+\subparagraph{Column Break}
+This command will force the following text to move to the next column:\\
+\textbackslash columnbreak
+
+\paragraph{With parcolumns package}
+This package will allowyou to format spwcific chunks of text with the amount of columns that you want (In Document Structure section) and lets you customize the size of each columns. *BETTER*:\\
+\textbackslash usepackage \{parcolumns\}\\
+\textbackslash begin\{parcolumns\}\{nº of columns\}\\
+\textbackslash colchunk\{\\
+Text of column 1\\
+\textbackslash sloppy\}\\
+...\\
+\textbackslash colchunk\{\\
+Text of column n\\
+\textbackslash sloppy\}\\
+\textbackslash end\{parcolumns\}\\
+\subparagraph{Column Seperator}
+\textbackslash begin\{parcolumns\}[rulebetween=true]\{nº of columns\}
+\subparagraph{Column Width}
+\textbackslash begin\{parcolumns\}[colwidth=\{1=size in cm,..., n=Xcm\}]{nº of columns\}\\
+Its better to make the size in terms of the text size:\\
+colwidth=\{1=X\textbackslash textwidth, ...\} where X is a number from 0 to 1
+\paragraph{Column Spacing}
+ begin\{parcolumns\}[distance= size in pt]\{nº of columns\}
+
+
+
+\subsection{Document Structure}
+\paragraph{}
+To start writing your document you'll have to put different code between: \textbackslash begin\{document\} ... end\{document\}.
+\subsubsection{Sections}
+\paragraph{}
+The type of section to use depends on the document that you are writing. Each section has a numember asgined to it called level.\\
+Lvl -1 : \textbackslash part\{...\}\\
+Lvl 0 : \textbackslash chapter\{...\} *Books only*\\
+Lvl 1 : \textbackslash section\{...\}\\
+Lvl 2 : \textbackslash subsection\{...\}\\
+Lvl 3 : \textbackslash subsubsection\{...\}\\
+Lvl 4 : \textbackslash paragraph\{...\}\\
+Lvl 5 : \textbackslash subparagraph\{...\}\\
+\paragraph{}
+The numbering of the sections will stop automatically at lvl 3 (subsection). To show the numbering as you please: \textbackslash setcounter\{secnumdepth\}\{lvl number\}. If you don't want numbering in a specific section use: \textbackslash section*\{...\}. This section will not appear in Toc.
+\subsubsection{Useful}
+\paragraph{Pagebreaks}
+There are 2 commands available \textbackslash newpage and \textbackslash pagebreak
+\paragraph{Hyphen -}
+Peanut-Butter and jelly
+\paragraph{En dash \textendash}
+\textbackslash textendash Short dash to mention range like,  years from 1990\textendash2010, page 1\textendash21
+\paragraph{Em dash \textemdash}
+\textbackslash textemdash Long dash use to clarify/ give additional information, is used like colons or parentheses:
+\textemdash additional information\textemdash
+\paragraph{Ellipsis \ldots}
+\textbackslash ldots
+
+\subsubsection{Font sizes}
+\paragraph{}
+To use in the rest of the text use just the command, to use in specific text enclose it into brackets \{\}\\
+
+\textbackslash tiny : {\tiny the quick brown fox jumps over the lazy dog}\\
+\textbackslash scriptsize : {\scriptsize  the quick brown fox jumps over the lazy dog\\}
+\textbackslash footnotesize : {\footnotesize  the quick brown fox jumps over the lazy dog }\\
+\textbackslash small : {\small  the quick brown fox jumps over the lazy dog }\\
+\textbackslash  normalsize : {\normalsize  the quick brown fox jumps over the lazy dog }\\
+\textbackslash large : {\large the quick brown fox jumps over the lazy dog   }\\
+\textbackslash Large : {\Large the quick brown fox jumps over the lazy dog } \\
+\textbackslash LARGE : {\LARGE the quick brown fox jumps over the lazy dog } \\
+\textbackslash huge : {\huge the quick brown fox jumps over the lazy dog }\\
+\textbackslash Huge : {\Huge the quick brown fox jumps over the lazy dog }\\
+\subsubsection{Text attributes}
+\textbackslash textbf \{\} (bold): \textbf{the quick brown fox jumps over the lazy dog}\\
+\textbackslash textit \{\} (italics): \textit{the quick brown fox jumps over the lazy dog}\\
+\textbackslash underline \{\} : \underline{the quick brown fox jumps over the lazy dog}\\
+\textbackslash textsc \{\} (small caps): \textsc{the quick brown fox jumps over the lazy dog}\\
+\textbackslash textrm \{\} (roman face): \textrm{the quick brown fox jumps over the lazy dog}\\
+\textbackslash texsf \{\} (sans serif): \textsf{the quick brown fox jumps over the lazy dog}\\
+\textbackslash texttt \{\} (typewriter): \texttt{the quick brown fox jumps over the lazy dog}\\
+\textbackslash textsuperscript \{\} (superscript): H\textsuperscript{x}O\\
+\textbackslash textsubscript \{\} (textsubscript): H\textsubscript{2}O\\
+
+\subsubsection{Post Script Fonts (Emojis)}
+\paragraph{}
+We need the package \texttt{pifont}
+\paragraph{}
+To use one emoji: \textbackslash ding \{number of emoji\}
+\paragraph{}
+Line of emojis enclosing a text: \textbackslash dingfill \{number of emoji\} text \textbackslash dingfill \{number of emoji\}
+\paragraph{}
+Line of emojis: \textbackslash dingline \{number of emoji\}
+
+\subsubsection{Bullets and Numbering}
+\paragraph{}
+To create a list with bullets (\ding{108}) for each item.\\
+\textbackslash begin\{itemize\}\\
+\textbackslash item \ldots\\
+\textbackslash end\{itemize\}
+\paragraph{}
+To create a list enumerated (1, 2, 3, \ldots).\\
+\textbackslash begin\{enumerate\}\\
+\textbackslash item \ldots\\
+\textbackslash end\{enumerate\}
+
+\paragraph{}
+To create a list enumerated but with (A,B,C, \ldots) or (a,b,c, \ldots) we need to use the package \texttt{enumerate}.\\
+\textbackslash begin\{enumerate\}[A. or a.]\\
+\textbackslash item \ldots\\
+\textbackslash end\{enumerate\}
+
+
+\paragraph{}
+To create a list with a bold word instead of an icon or number\\
+\textbackslash begin\{description\}\\
+\textbackslash item [bold text]\ldots\\
+\textbackslash end\{description\}
+
+\paragraph{}
+Create a list with emojis from the \texttt{pifont} package\\
+\textbackslash begin\{dinglist\}{emoji number}\\
+\textbackslash item \ldots\\
+\textbackslash end\{dinglist\}
+
+\paragraph{}
+Create a list with emojis from the \texttt{pifont} package every item is the next emoji number\\
+\textbackslash begin\{dingautolist\}{emoji number}\\
+\textbackslash item \ldots\\
+\textbackslash end\{dingautolist\}
+
+\subsubsection{Source Ccode and Programming}
+\paragraph{}
+To display source code use the package \texttt{listings}. Writing code in the document:\\
+\textbackslash begin \{lstlisting\} \ldots code \ldots \textbackslash end \{lstlisting\}
+\paragraph{}
+Loading code from file (\textbackslash must be changed for /):\\
+\textbackslash lstinputlisting{path of file}
+\paragraph{}
+Formating source code, here is better to give an example (this will go in the Document info section):
+
+\begin{lstlisting}
+\lstdefinestyle{custom}{
+  language=python,
+  backgroundcolor = \color[HTML]{fafafa},
+  frame=single,
+  breaklines=true,
+  xleftmargin= 15pt,
+  showstringspaces=false,
+  stepnumber=1,
+  numbers=left,
+  numbersep=9pt,
+  basicstyle=\normalsize\ttfamily\color[HTML]{767f88}, keywordstyle=\bfseries\color[HTML]{fe905d},
+  commentstyle= \itshape\color[HTML]{b8c6d1}, identifierstyle=\color[HTML]{7a818a},
+  stringstyle= \color[HTML]{a0c136}
+  }
+\lstset{style=custom}
+
+\end{lstlisting}
+
+
+\subsubsection{Miscellaneous}
+\paragraph{Title}
+Use the title specified in the Document Info with: \textbackslash maketitle
+
+\paragraph{ToC}
+The table of contents: \textbackslash tableofcontents. the numbering in the ToC is not affected by the numbering of the sections so the lvl 3 is the set standar to change this:
+\textbackslash setcounter\{tocdepth\}\{lvl number\}. If a line is not numbered by this command \textbackslash section*\{...\} you can still make it appear in the ToC using: \textbackslash addcontentsline\{toc\}\{section/lvl\}\{name to be displayed\}
+
+\paragraph{Alias}
+And additional name that a section/lvl recives to be identified in the ToC: \textbackslash section [Name for the ToC]\{Name for the actual docuement\}
+
+\paragraph{Footnotes}
+What ever text you want to type \textbackslash footnote\{text in the foot note\} keep on writing the text.
+
+\section{Mathematics}
+ \subsection{Basics}
+ \paragraph{}
+ We will use the package \texttt{mathtools}. To start a mathematical text we enclose the text in \$ and \$.
+ \begin{itemize}
+   \item $(a+b)^2=a^2+2ab+b^2$ \ding{222} \textit{$\wedge $ for powers}
+   \item $a_{n}+a_{n+1}+ \ldots$ \ding{222} \textit{\_ for subindex}
+   \item $cos(2\theta)=1-2sin^2\theta$ \ding{222}\textit{\textbackslash theta} greek leters have special commands
+   \item $c=a_1\times b_1$ \ding{222} \textit{\textbackslash times} lots of symbols with special commands
+   \item $\sqrt[3]{64}=4$ \ding{222} \textit{\textbackslash sqrt[index]\{number inside\}}
+   \item  $\frac{a}{b}$ \ding{222} \textit{\textbackslash frac \{numerator\}\{denominator\}}
+   \item $dx \mathrm{or d}x$ \ding{222} \textit{\textbackslash mathrm\{text\}} lets you write normal text in a math text
+ \end{itemize}
+ \subsection{braces size}
+  \paragraph{}
+  Commands to change the size of the braces.
+  \begin{itemize}
+    \item \$\textbackslash big (\ldots \textbackslash big)\$:  $\big(\big)$
+    \item \$\textbackslash Big (\ldots \textbackslash Big)\$:  $\Big(\Big) $
+    \item \$\textbackslash bigg (\ldots \textbackslash bigg)\$: $\bigg(\bigg) $
+    \item \$\textbackslash Bigg (\ldots \textbackslash Bigg)\$: $\Bigg(\Bigg) $
+  \end{itemize}
+  \textit{With} $\Bigg\{A+\bigg(B-\Big[\big(C \times D\big)/E\Big]\bigg)\Bigg\}$ \textit{Without} $\{A+(B-[(C \times D)/ E])\}$
+
+ \subsection{Equation enclosing}
+  The equation enclosing consists on displaying one equation centered on the page with a numbering to the left. Use \texttt{amsmath} package and equation* to get rid of the number.\\
+  \textbackslash begin\{equation\} \ldots \textbackslash end\{equation\}
+  \begin{equation}
+    x=\frac{b \pm \sqrt{b^2 -4ac}}{2a}
+  \end{equation}
+ \subsection{Align enclosing}
+  \paragraph{}
+    Align some quations with \& (point of alignment) and the \textbackslash nolinenumber comand.\\
+    \textbackslash begin\{equation\} \ldots\& \textbackslash end\{equation\}
+    \begin{align}
+      3x-9&=9\\
+      3x&=9+6 \nonumber\\
+      x&=\frac{9+6}{3}\nonumber\\
+      x&=5 \nonumber
+    \end{align}
+ \subsection{Cases enclosing}
+  \paragraph{}
+    Now let's do some sistems of equations with the cases enclosing
+    equation.\\
+  \$\textbackslash begin\{cases\} \ldots\& \textbackslash end\{cases\}\$\\
+    text bla bla
+      $\begin{cases}
+      \text{0}& \text{if i = j,}\\
+      \text {x is even}& \text{if x $\in$ E}\\
+      \text {$\frac{x}{7}$}& \text{if x $\notin$ E}\\
+      \text{$\infty$}& \text{if x $\ne$ 70}
+      \end{cases}$
+      \paragraph{}
+      *Nesting the case enclousing inside the equation enclousing without the begining and ending \$.*
+ \subsection{Matrices}
+ \$\textbackslash begin\{type of matrix\}\\ 1\_1 \& 1\_2 \textbackslash\textbackslash\\2\_1 \& 2\_2\\
+  \textbackslash end\{type of matrix\}\$\\
+ \begin{parcolumns}{2}
+   \colchunk{
+   The \textbf{bmatrix} square corners.
+   \begin{equation*}
+     \begin{bmatrix}
+       a & b & c \\
+       d & e & f \\
+       g & h & i
+     \end{bmatrix}
+   \end{equation*}
+   \paragraph{}
+   The \textbf{pmatrix} round brackets.
+   \begin{equation*}
+     \begin{pmatrix}
+       a & b & c \\
+       d & e & f \\
+       g & h & i
+     \end{pmatrix}
+   \end{equation*}
+   \paragraph{}
+   The \textbf{Bmatrix} curly brackets.
+   \begin{equation*}
+     \begin{Bmatrix}
+       a & b & c \\
+       d & e & f \\
+       g & h & i
+     \end{Bmatrix}
+   \end{equation*}
+   \sloppy}
+   \colchunk{
+   The \textbf{matrix} without brackets.
+   \begin{equation*}
+     \begin{matrix}
+       a & b & c \\
+       d & e & f \\
+       g & h & i
+     \end{matrix}
+   \end{equation*}
+   \paragraph{}
+   The \textbf{vmatrix} with {\i} as a bracket.
+   \begin{equation*}
+     \begin{vmatrix}
+       a & b & c \\
+       d & e & f \\
+       g & h & i
+     \end{vmatrix}
+   \end{equation*}
+   \paragraph{}
+   The \textbf{Vmatrix} with {\i}{\i} as brackets.
+   \begin{equation*}
+     \begin{Vmatrix}
+       a & b & c \\
+       d & e & f \\
+       g & h & i
+     \end{Vmatrix}
+   \end{equation*}
+   \sloppy}
+ \end{parcolumns}
+ \subsection{Sum}
+ \paragraph{}
+ Two types of Sums can be displayed
+ \begin{itemize}
+   \item $\sum_{i =-\infty}^{x =\infty}$ \ding{222} \$\textbackslash sum \_\{lower bound\}$\wedge $\{upper bound\}\$
+   \item $\displaystyle\sum_{i=-\infty}^{\infty}$ \ding{222} \$\textbackslash displaystyle\textbackslash sum \_\{lower bound\}$\wedge $\{upper bound\}\$
+ \end{itemize}
+ \subsection{Integals and Limits}
+ \begin{itemize}
+   \item $\displaystyle\int_{a}^{b}f(x)\mathrm{d}x$ \ding{222} \textbackslash displaystyle\textbackslash int \_\{lower bound\}$\wedge $\{upper bound\}
+   \item $\displaystyle\iint_{R} f(x,y)\mathrm{d}A$\ding{222} \textbackslash displaystyle\textbackslash intt \_\{lower bound\}$\wedge $\{upper bound\}
+   \item $\displaystyle\lim_{z \to a}f(x)$\ding{222} \textbackslash displaystyle\textbackslash lim \_\{x \textbackslash to n\}
+ \end{itemize}
+
+\newpage
+\section{Tables}
+\subsection{Basics}
+\paragraph{}
+To make a table will use \textbackslash begin\{tabular\}\{column settings\} \ldots
+\textbackslash end\{tabular\}\\
+\begin{center}
+  \begin{tabular}{|c|c|}
+  \hline
+  r & right alignment\\
+  \hline
+  l & left alignment\\
+  \hline
+  c & center alignment\\
+  \hline
+  p{Xcm} & left aligment whose with is X\\
+  \hline
+  $\mid$ & separete the column by a vertical line\\
+  \hline
+  $\parallel$ & separete column by double vertical line\\
+  \hline
+  \end{tabular}
+\end{center}
+\paragraph{\textit{\{$\parallel$c$\mid$l$\mid$r$\mid$p\{1cm\}$\parallel$\}}}
+ \textit{ separete each column with a vertical line, the first and last double vertical lines on the outside. First column will be centered, second left aling, third right aling and the last column left align and fixed width of 1cm.}
+ \paragraph{}
+ To separete which content goes in which column will use \textbf{\&} and to change from rows will use \textbf{\textbackslash \textbackslash}. But there exists other comands:
+ \begin{description}
+   \item[\textbackslash hline] palce a horizontal line
+   \item[\textbackslash cline\{1-3\}]horizontal line from column 1 to 3
+   \item [\textbackslash newline] new line within the same cell *with p{Xcm} only*
+ \end{description}
+ \begin{lstlisting}[frame=single]
+  \begin{tabular}{column settings}
+    1 column & 2 column & 3 column\\
+        .          .          .
+        .          .          .
+        .          .          .
+
+  \end{tabular}
+ \end{lstlisting}
+
+
+
+
+ \subsection{Dashed lines}
+ \paragraph{}
+ The package \texttt{arydshln} allows you to, instead of a continuos line($\mid$) use dashed or dotted lines(:). with this package you will have to specify some \textbf{info} [\textit{dash size in pt/ space between dashes in pt}].
+ \paragraph{}
+ \begin{description}
+   \item[\textbackslash hdashline[info]] creates a horizontal dashed line.
+   \item[\textbackslash cdashline[info]\{1-3\}] horizontal dashed line from column 1 to 3.
+ \end{description}
+
+
+  \begin{minipage}{.45\textwidth}
+    \begin{flushleft}
+  \begin{lstlisting}[basicstyle=\footnotesize,]{Name}
+  \begin{tabular}{::c|c|c::}
+    \hdashline[2pt/2pt]
+    Anos & Penes & Pussys\\
+    \hdashline[3pt/3pt]
+    A & B & C\\
+    \hdashline[4pt/4pt]
+    D & D & E\\
+    \cdashline{1-2}[5pt/5pt]
+    F & G & G\\
+    \cdashline{2-3}[6pt/6pt]
+  \end{tabular}
+  \end{lstlisting}
+\end{flushleft}
+  \end{minipage}\hfill
+  \begin{minipage}{.45\textwidth}
+    \begin{tabular}{::c|c|c::}
+      \hdashline[2pt/2pt]
+      Anos & Penes & Pussys\\
+      \hdashline[3pt/3pt]
+      A & B & C\\
+      \hdashline[4pt/4pt]
+      D & D & E\\
+      \cdashline{1-2}[5pt/5pt]
+      F & G & G\\
+      \cdashline{2-3}[6pt/6pt]
+    \end{tabular}
+  \end{minipage}
+
+  \subsection{spacing in tables}
+  \paragraph{}
+  The arraystretch options tells LaTeX the overall size of the table. by default is set to 1.
+  \begin{lstlisting}[frame=single]
+    \renewcommand{\arraystretch}{2}
+      \begin{tabular}{...}
+          .
+          .
+          .
+      \end{tabular}
+  \end{lstlisting}
+  \paragraph{}
+  On the left with the default setting on the right with arraystretch set to 2.
+  \paragraph{}
+
+  \begin{parcolumns}{2}
+    \colchunk{
+      \begin{tabular}{c|c|c::}
+        \cline{2-3}
+        - & Column B & Column C\\
+        \hline
+        Element a & Element b & Element c\\
+        \hdashline[3pt/3pt]
+        Element d & Element e & Element f\\
+        \hdashline[3pt/3pt]
+      \end{tabular}
+    \sloppy}
+    \colchunk{
+    \renewcommand{\arraystretch}{2}
+    \begin{tabular}{c|c|c::}
+      \cline{2-3}
+      - & Column B & Column C\\
+      \hline
+      Element a & Element b & Element c\\
+      \hdashline[3pt/3pt]
+      Element d & Element e & Element f\\
+      \hdashline[3pt/3pt]
+    \end{tabular}
+    \sloppy}
+  \end{parcolumns}
+\subsection{Merge Columns}
+\paragraph{}
+With the \textbackslash multicolumn command, you will have to specify \{columns to merge\} \{alignment\} \{text\}
+\paragraph{}
+
+\begin{minipage}{.45\textwidth}
+\begin{lstlisting}[basicstyle=\footnotesize,]{Name}
+  \begin{tabular}{::c|c|c::}
+    \hline
+    \multicolumn{3}{l}{Pussys...}\\
+    \hdashline[3pt/3pt]
+    A & B & C\\
+    \hdashline[4pt/4pt]
+    \multicolumn{2}{::c|}{D} & E\\
+    \hdashline
+    F & \multicolumn{2}{|c::}{G}\\
+    \hdashline
+  \end{tabular}
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.45\textwidth}
+  \begin{center}
+  \renewcommand{\arraystretch}{2}
+  \begin{tabular}{::c|c|c::}
+    \hline
+    \multicolumn{3}{l}{Pussys and ABC's}\\
+    \hdashline[3pt/3pt]
+    A & B & C\\
+    \hdashline[4pt/4pt]
+    \multicolumn{2}{::c|}{D} & E\\
+    \hdashline
+    F & \multicolumn{2}{|c::}{G}\\
+    \hdashline
+  \end{tabular}
+\end{center}
+\end{minipage}
+
+\subsection{Merge rows}
+\paragraph{}
+We'll have to use the package \texttt{multirow} similar to the multicolumn command \textbackslash multirow require \{rows to merge\} \{width in cm or * widht of the content\} \{text\}
+\paragraph{}
+
+\begin{minipage}{.45\textwidth}
+\begin{lstlisting}[basicstyle=\footnotesize,]{Name}
+\begin{tabular}{|c|c|c|}
+  \hline
+  Anos & Penes & Pussys\\
+  \hline
+  A & B & C\\
+  \hdashline[4pt/4pt]
+  \multirow{3}{*}{D} & E & F\\
+  & G & H\\
+  & I & J\\
+  \hdashline
+  \multirow{2}{*}{K}& L & M\\
+  & N & O\\
+  \hline
+\end{tabular}
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.45\textwidth}
+  \begin{center}
+  \renewcommand{\arraystretch}{2}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    Anos & Penes & Pussys\\
+    \hline
+    A & B & C\\
+    \hdashline[4pt/4pt]
+    \multirow{3}{*}{D} & E & F\\
+    & G & H\\
+    & I & J\\
+    \hdashline
+    \multirow{2}{*}{K}& L & M\\
+    & N & O\\
+    \hline
+  \end{tabular}
+\end{center}
+\end{minipage}
+\subsection{Colors}
+\paragraph{}
+The package \texttt{colortbl} enable us different comands to change row color, column color or cell color. The package \texttt{xcolor} let's you use all of the premade colors and create more. *color-name!30 you'll use 30\% of that color*.
+\subsubsection{Row}
+\paragraph{}
+In order to change the entire row color use the \textbackslash rowcolor \{color!color\%\} command before the row begins.
+\paragraph{}
+
+\begin{minipage}{.45\textwidth}
+\begin{lstlisting}[basicstyle=\footnotesize,]{Name}
+\begin{tabular}{|c|c|c|}
+  \hline
+  Anos & Penes & Pussys\\
+  \hline
+  \rowcolor{green!30}
+  A & B & C\\
+  \hline
+  \rowcolor{blue!30}
+  D & E & F \\
+  \hline
+  \rowcolor{red!15}
+  G & H & I \\
+  \hline
+\end{tabular}
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.45\textwidth}
+  \begin{center}
+  \renewcommand{\arraystretch}{2}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    Anos & Penes & Pussys\\
+    \hline
+    \rowcolor{green!30}
+    A & B & C\\
+    \hline
+    \rowcolor{blue!30}
+    D & E & F \\
+    \hline
+    \rowcolor{red!15}
+    G & H & I \\
+    \hline
+  \end{tabular}
+\end{center}
+\end{minipage}
+\subsubsection{Column}
+\paragraph{}
+This command colors an entire column $>$\{\textbackslash columncolor \{color!color\%\}\}. Needs to be written while defining columns.
+\paragraph{}
+\begin{minipage}{.45\textwidth}
+\begin{lstlisting}[basicstyle=\footnotesize,]{Name}
+\begin{tabular}{|
+>{\columncolor{green!30}}c|
+>{\columncolor{blue!30}}c|
+>{\columncolor{red!15}}c|}
+\hline
+Anos & Penes & Pussys\\
+\hline
+A & B & C\\
+\hdashline[4pt/4pt]
+D & E & F \\
+\hdashline[4pt/4pt]
+G & H & I \\
+\hline
+\end{tabular}
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.45\textwidth}
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{|
+  >{\columncolor{green!30}}c|
+  >{\columncolor{blue!30}}c|
+  >{\columncolor{red!15}}c|}
+  \hline
+  Anos & Penes & Pussys\\
+  \hline
+  A & B & C\\
+  \hdashline[4pt/4pt]
+  D & E & F \\
+  \hdashline[4pt/4pt]
+  G & H & I \\
+  \hline
+\end{tabular}
+\end{center}
+\end{minipage}
+
+\subsubsection{Cell}
+\paragraph{}
+The syntax is quite similar to the rest \textbackslash cellcolor \{color!colo\%\}.
+\paragraph{}
+\begin{minipage}{.45\textwidth}
+\begin{lstlisting}[basicstyle=\footnotesize,]{Name}
+\begin{tabular}{|c|c|c|}
+\hline
+Anos & Penes & Pussys\\
+\hline
+\cellcolor{green!30}A & B & C\\
+\hdashline[4pt/4pt]
+D & \cellcolor{blue!30} E & F \\
+\hdashline[4pt/4pt]
+G & H & \cellcolor{red!15}I \\
+\hline
+\end{tabular}
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.45\textwidth}
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{|c|c|c|}
+  \hline
+  Anos & Penes & Pussys\\
+  \hline
+  \cellcolor{green!30}A & B & C\\
+  \hdashline[4pt/4pt]
+  D & \cellcolor{blue!30} E & F \\
+  \hdashline[4pt/4pt]
+  G & H & \cellcolor{red!15}I \\
+  \hline
+\end{tabular}
+\end{center}
+\end{minipage}
+
+\subsubsection{Alternate rows}
+\paragraph{}
+First youll need to import the package xcolor as follows \textbackslash usepackage[table]\{xcolor\}. The command lets use colors to alternate rows of a table \textbackslash rowcolors \{starting row number\} \{odd row color\} \{even row color\}.This command is used before the tabular enclousure. *Color are defined as the last examples* *incompatible with dashed lines*
+\paragraph{}
+
+\begin{minipage}{.45\textwidth}
+\begin{lstlisting}[basicstyle=\footnotesize,]{Name}
+\rowcolors{1}{green!30}{red!15}
+\begin{tabular}{|c|c|c|}
+\hline
+Anos & Penes & Pussys\\
+\hline
+A & B & C\\
+\hline
+D & E & F \\
+\hline
+G & H & I \\
+\hline
+\end{tabular}
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}{.45\textwidth}
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\rowcolors{1}{green!30}{red!15}
+\begin{tabular}{|c|c|c|}
+  \hline
+  Anos & Penes & Pussys\\
+  \hline
+  A & B & C\\
+  \hline
+  D & E & F \\
+  \hline
+  G & H & I \\
+  \hline
+\end{tabular}
+\end{center}
+\end{minipage}
+
+\subsection{Table enviroment}
+\paragraph{}
+The table enviroment is used to position the document and to specify the caption of the table.
+\paragraph{}
+\begin{lstlisting}[frame=single]
+\begin{table}[POSITION-PARAMETER]
+\centering
+\begin{tabular}{...}
+    .
+    .
+    .
+\end{tabular}
+\caption{text}
+\end{table}
+\end{lstlisting}
+\paragraph{}
+Useful commands
+\begin{description}
+\item[\textbackslash centering] centers the table on the page
+\item[\textbackslash caption\{text\}] write a caption under the table
+\end{description}
+\begin{table}[h]
+\centering
+  \renewcommand{\arraystretch}{2}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    Anos & Penes & Pussys\\
+    \hline
+    A & B & C\\
+    \hdashline[4pt/4pt]
+    D & E & F \\
+    \hdashline[4pt/4pt]
+    G & H & I \\
+    \hline
+  \end{tabular}
+  \caption{This a caption}
+\end{table}
+\newpage
+\section{Useful Packages}
+
+\paragraph{blindtext}
+Adds dummy text in your document to see how it looks. Use this code: \textbackslash blindtext
+
+\paragraph{geometry}
+This package,used in the docuement and package section, enables us to manage margins.\\
+\textbackslash usepackage[margin=1in]\{geometry\} makes every margin of 1 inch\\
+\textbackslash usepackage[top=1in, bottom=0.75in, left=1.25in, right=1.1in ]\{geometry\} handle each margin individually.\\
+\textbackslash usepackage[inner=2in, outer=1in, top=3in, bottom=1in]\{geometry\} manage margins in two-sided documents
+
+\paragraph{fancyhdr}
+This package,used in the document info section, lets us be more precise in what we want to put in the header or footer. After \textbackslash usepackage\{fancyhdr\} we use \textbackslash pagestyle\{fancy\}. Now we can use
+deifferent commands:\\
+\textbackslash lhead\{...\}, \textbackslash rhead\{...\}, \textbackslash chead\{...\}\\ \textbackslash lfoot\{...\}, \textbackslash rfoot\{...\}, \textbackslash cfoot\{...\}\\
+Between the brackets you can put text or comands to be shown in that especific place. Useful commands are:\\
+\textbackslash thepage : shows the current page\\
+\textbackslash chaptername : title ``chapter''\\
+\textbackslash thechapter : chapter number\\
+\textbackslash thesection : section number\\
+\textbackslash pageref\{LastPage\} : total number of pages *lastpage package is needed*\\
+To get rid of the header vanilla text use: \textbackslash fancyhead\{\}
+
+\end{document}
