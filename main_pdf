@@ -10,6 +10,10 @@
 \usepackage{arydshln}
 \usepackage{multirow}
 \usepackage[table]{xcolor}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{picinpar}
+
 
 \title{LaTeX Notes}
 \author{Michel Nory Garcia}
@@ -821,6 +825,7 @@ Useful commands
 \begin{description}
 \item[\textbackslash centering] centers the table on the page
 \item[\textbackslash caption\{text\}] write a caption under the table
+\item[\textbackslash listoftables] display the caption of all of the tables, usually written after the table of contents
 \end{description}
 \begin{table}[h]
 \centering
@@ -839,6 +844,187 @@ Useful commands
   \caption{This a caption}
 \end{table}
 \newpage
+
+\section{Images}
+\paragraph{}
+To include images we will use the package \texttt{graphicx}. The following file extentions are supported: .png , .jpg , .pdf and .eps. The command \texttt{includegraphics} is used to display images.
+\paragraph{}
+\begin{lstlisting}
+  \usepackage{graphicx}
+  \includegraphics[Atribute-1, Atribute-2, ...]{FileName.extention}
+\end{lstlisting}
+\subsection{Atributes}
+\paragraph{}
+There exists two atributes to size the image: width and height both can be specified in cm, inches, px, ...
+\paragraph{}
+Just specify one of them, the other parameter will change to maintain the same ratio.
+\begin{itemize}
+  \item width=X unit
+  \item height=X unit
+\end{itemize}
+
+\paragraph{}
+\begin{center}
+\includegraphics[height=6cm]{C:/Users/miche/Desktop/LaTex_learning/selfmade man.png}
+\end{center}
+\paragraph{}
+There exist the attribute scale that allows you to resize an image withou explicitly givin height or width.
+\begin{itemize}
+  \item scale=X
+\end{itemize}
+\paragraph{}
+\begin{center}
+\includegraphics[scale=0.4]{C:/Users/miche/Desktop/LaTex_learning/selfmade man.png}
+\end{center}
+\paragraph{}
+An image can also be trimed for that you will have to set the atribute clip to true and with the atribute trim you'll be able to specify how much and in wich units to trim each side.
+\begin{itemize}
+  \item clip=true, trim= Left cm  Bottom cm Right cm Top cm
+\end{itemize}
+\paragraph{}
+\begin{center}
+\includegraphics[clip=true, trim= 3cm 6cm 3cm 4cm]{C:/Users/miche/Desktop/LaTex_learning/selfmade man.png}
+\end{center}
+\paragraph{}
+The atribute angle lets you rotate images.
+\begin{itemize}
+  \item angle= $\alpha$ in degrees
+\end{itemize}
+\paragraph{}
+\begin{center}
+\includegraphics[scale=.4, angle=45]{C:/Users/miche/Desktop/LaTex_learning/selfmade man.png}
+\end{center}
+\subsection{Image borders}
+To create a border around your image use the command \textbackslash fbox.
+\paragraph{}
+
+\begin{lstlisting}
+  \fbox{\includegraphics[Atribute-1, Atribute-2, ...]
+    {FileName.extention}}
+\end{lstlisting}
+\paragraph{}
+\begin{center}
+\fbox{\includegraphics[scale=.4]{C:/Users/miche/Desktop/LaTex_learning/selfmade man.png}}
+\end{center}
+\paragraph{}
+To adjust \textbf{image border} use the following command before the fbox.
+\paragraph{}
+  \begin{lstlisting}
+    \setlength\fboxrule(thickness in pt)
+    \fbox{\includegraphics[Atribute-1, Atribute-2, ...]
+      {FileName.extention}}
+  \end{lstlisting}
+
+\paragraph{}
+\begin{center}
+\setlength\fboxrule{3pt}
+\fbox{\includegraphics[scale=.4]{C:/Users/miche/Desktop/LaTex_learning/selfmade man.png}}
+\end{center}
+\paragraph{}
+To set \textbf{ space between border and image} is a similar sintax than before
+\paragraph{}
+  \begin{lstlisting}
+    \setlength\fboxsep(separation in pt)
+    \fbox{\includegraphics[Atribute-1, Atribute-2, ...]
+      {FileName.extention}}
+  \end{lstlisting}
+
+\paragraph{}
+\begin{center}
+\setlength\fboxsep{30pt}
+\fbox{\includegraphics[scale=.4]{C:/Users/miche/Desktop/LaTex_learning/selfmade man.png}}
+\end{center}
+\paragraph{}
+
+\subsection{Figure enviroment}
+\paragraph{}
+The figure enviroment is used to specify a certain position and ad captions.
+\paragraph{}
+\begin{lstlisting}
+\begin{figure}[position]
+  \includegraphics[Atribute-1, Atribute-2, ...]
+    {FileName.extention}
+  \caption{text}
+\end{figure}
+\end{lstlisting}
+\begin{center}
+  \begin{tabular}{|c|c|}
+    \hline
+    positions & \\
+    \hline
+    h & approximately here\\
+    H & exactly here, as in . Tex file\\
+    t & at the top of the page\\
+    b & at the bottom of the page\\
+    p & on a special page\\
+    ! & overeide internal parameters\\
+    \hline
+  \end{tabular}
+\end{center}
+\paragraph{}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=.4]{C:/Users/miche/Desktop/LaTex_learning/selfmade man.png}
+  \caption{Self Made Man by Bobbie Carlyle }
+\end{figure}
+\paragraph{}
+The command \textbackslash listoffigures display the caption of all the images, typically used after the table of contents
+
+\subsection{Wrap figures}
+\paragraph{}
+There are 2 options to displace an image alongside text
+\subsubsection{wrapfigure enviroment}
+\paragraph{}
+We'll use the package \texttt{wrapfig}.
+\paragraph{}
+\begin{lstlisting}
+\begin{wrapfigure}{position}{number\textwidth}
+  \includegraphics[Atribute-1, Atribute-2, ...]
+    {FileName.extention}
+  \caption{text}
+\end{wrapfigure}
+\end{lstlisting}
+\begin{center}
+  \begin{tabular}{|c|c|}
+    \hline
+    position &\\
+    \hline
+    l & image on the left and text on the right\\
+    r & image on the right and text on the left\\
+    i & inside edge\\
+    o & away from binding (double pages)\\
+    \hline
+    Lower case & image placed exactly here\\
+    Upper case & image can float\\
+    \hline
+  \end{tabular}
+\end{center}
+\begin{wrapfigure}{o}{0.4\textwidth}
+\includegraphics[scale=.35]{C:/Users/miche/Desktop/LaTex_learning/selfmade man.png}
+\caption{Self Made Man by Bobbie Carlyle}
+\end{wrapfigure}
+\paragraph{}
+\textsf{\blindtext}
+\subsubsection{figwindow enviroment}
+\paragraph{}
+To use this enviroment we will have to use the package \texttt{picinpar}.*Do not put a space between commas*
+\paragraph{}
+\begin{lstlisting}
+\begin{figwindow}[lines-skipped,
+    image-alignment(l,r,c),
+    \includegraphics[Atribute-1, Atribute-2, ...]
+    {FileName.extention},
+    {caption}]
+  text
+\end{figwindow}
+\end{lstlisting}
+\paragraph{}
+
+\begin{figwindow}[4,c,%
+{\includegraphics[scale=.2]{C:/Users/miche/Desktop/LaTex_learning/selfmade man.png}},%
+{Made Man by Bobbie Carlyle}]
+\textsf{\Blindtext[2]}
+\end{figwindow}
 \section{Useful Packages}
 
 \paragraph{blindtext}
@@ -860,6 +1046,8 @@ Between the brackets you can put text or comands to be shown in that especific p
 \textbackslash thechapter : chapter number\\
 \textbackslash thesection : section number\\
 \textbackslash pageref\{LastPage\} : total number of pages *lastpage package is needed*\\
-To get rid of the header vanilla text use: \textbackslash fancyhead\{\}
+To get rid of the header vanilla text use: \textbackslash fancyhead\{\}\\
+To get rid of the header horizontal line: \textbackslash renewcommand \{\textbackslash headrulewidth\}\{0pt\}
 
 \end{document}
+
