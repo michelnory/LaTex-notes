@@ -1025,6 +1025,69 @@ To use this enviroment we will have to use the package \texttt{picinpar}.*Do not
 {Made Man by Bobbie Carlyle}]
 \textsf{\Blindtext[2]}
 \end{figwindow}
+\section{Include Pdfs}
+\paragraph{}
+The package \texttt{pdfpages} let's you include pages from another .pdf document.
+\paragraph{}
+\begin{lstlisting}
+  \usepackage[option]{pdfpages}
+\end{lstlisting}
+\paragraph{}
+The available options are:
+\begin{description}
+  \item[final] inserts the .pdf file (default)
+  \item[draft] inserts a blank box with the filename instead of the .pdf
+  \item [demo] inserts an empty blank page instead of the .pdf file
+\end{description}
+\subsection{Insert pages}
+The basic sintax is as follows:
+\paragraph{}
+\begin{lstlisting}
+  \includepdf[pages={pages options}]{filename.pdf}
+\end{lstlisting}
+\paragraph{}
+Every page option should be separated by commas ``,''
+\paragraph{}
+\begin{center}
+\begin{tabular}{l|l}
+  \hline
+  Option & \\
+  \hline
+  nº & insert that page number\\
+  \{\} & insert a blank page\\
+  \{nº-nº\} & insert pages from the first to the last number\\
+  pages=- & display the whole document\\
+  \hline
+\end{tabular}
+\end{center}
+\subsubsection{Page style}
+\paragraph{}
+using the pagecommand you can set a certain style (header and footer), note that the style options are the same of the whole document because we are using the command \textbackslash thispagestyle. \textcolor{red}{refer to pagestyle options}
+\paragraph{}
+You can also set it to fancy and use options of the \texttt{fancyhdr} package.\\
+
+\begin{lstlisting}
+  \includepdf[pages=-, pagecommand={\thispagestyle{option}}]
+             {filename.pdf}
+\end{lstlisting}
+\subsubsection{Scale}
+The size of the pages can be scaled in a similar way images do.\\
+\begin{lstlisting}
+  \includepdf[pages=-, scale=number]{filename.pdf}
+\end{lstlisting}
+\subsubsection{Crop}
+A page can also be trimed for that set the atribute clip to true and with the atribute trim  specify how much and in wich units to trim each side.\\
+\begin{lstlisting}
+  \includepdf[pages=-, clip=true,
+              trim= L mm Bottom mm Right mm Top mm]
+             {filename.pdf}
+\end{lstlisting}
+\subsubsection{Rotate}
+To rotate pages is the same way images are rotated \\
+\begin{lstlisting}
+  \includepdf[pages=-, angle= angle in degrees]
+             {filename.pdf}
+\end{lstlisting}
 \section{Useful Packages}
 
 \paragraph{blindtext}
@@ -1050,4 +1113,3 @@ To get rid of the header vanilla text use: \textbackslash fancyhead\{\}\\
 To get rid of the header horizontal line: \textbackslash renewcommand \{\textbackslash headrulewidth\}\{0pt\}
 
 \end{document}
-
